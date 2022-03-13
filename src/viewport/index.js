@@ -9,6 +9,7 @@ const Viewport = ({ children }) => {
     }));
 
     const [code, setCode] = useState({});
+    const [viewportDevice,setViewport] = useState('100%')
 
   useEffect(() => {
     if (!window) {
@@ -36,12 +37,12 @@ const Viewport = ({ children }) => {
     <div className="viewport">
         <div className='h-screen overflow-hidden w-full relative'>
             <div className='w-full' style={{height:'14%'}}>
-                <Topbar setCode={setCode} />
+                <Topbar setCode={setCode} viewportAction={setViewport} screenSize={viewportDevice} />
             </div>
             <div style={{height:'86%'}} className='w-full flex flex-row'>
                 <div className=" page-container flex flex-row h-full" style={{flexBasis:'91%'}}>
-                    <div className='craftjs-renderer flex-1 h-full w-full transition overflow-auto'>
-                        <div className="relative h-full flex-col flex items-center bg-color-black">
+                    <div className='craftjs-renderer flex-1 h-full w-full transition overflow-auto flex justify-center'>
+                        <div className="page-container relative h-full flex-col flex items-center bg-color-black text-center" style={{width:viewportDevice}}>
                             {children}
                         </div>
                     </div> 

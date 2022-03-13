@@ -1,19 +1,17 @@
 import { useNode } from "@craftjs/core";
+import { Container,Box} from "@chakra-ui/react";
 import { ContainerSettings } from "./settings";
 
-const Container = ({ background, padding = 0, children }) => {
+const ViewPortContainer = ({ background, padding = 0, children }) => {
     const {connectors: { connect, drag }} = useNode();
     return (
-      <div
-        ref={(ref) => connect(drag(ref))}
-        style={{ margin: "5px 0", background, padding: `${padding}px`,width:'100%',height:'100%' }}
-      >
+      <Box maxW='xl' ref={(ref) => connect(drag(ref))} p={5} bg={background} minW='100%' h='100%'>
         {children}
-      </div>
+      </Box>
     );
   };
 
-  Container.craft = {
+  ViewPortContainer.craft = {
     props: {
       background: "#ffffff",
       padding: 3
@@ -23,4 +21,4 @@ const Container = ({ background, padding = 0, children }) => {
     }
   };
 
-  export default Container;
+  export default ViewPortContainer;

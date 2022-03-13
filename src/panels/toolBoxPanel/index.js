@@ -1,14 +1,14 @@
 import React from 'react';
 import { background, Box, SimpleGrid } from '@chakra-ui/react';
-import { AddRowIcon, Manage2Icon, Col1, Col2, Col3, Col4, Col5, Col6, LeftSidebar, RightSidebar, Video, Image, Input, DropDown, TextArea, Checkbox, SMS, Survey, Billing, Signature, Button, Headline, SubHeadline, Bullets, Countdown, Product } from '../../themes/icons';
+import { AddRowIcon, Manage2Icon, Col1, Col2, Col3, Col4, Col5, Col6, LeftSidebar, RightSidebar, Video, Image, Input, DropDown, TextArea, Checkbox, SMS, Survey, Billing, Signature, Button, HeadlineIcon, SubHeadline, Bullets, Countdown, Product } from '../../themes/icons';
 import { AiOutlineBorder } from "react-icons/ai";
 import {useEditor,Element } from "@craftjs/core";
 import { IconButton } from '@chakra-ui/react'
-import { Container,Text,ResizableComponent } from "../../components";
+import {Headline,ResizableComponent } from "../../components";
 
-const Toolbox = ({value}) => {
+const Toolbox = ({value,selected}) => {
     const { connectors, query } = useEditor();
-    return (<Box bg='grey' pos='absolute' h='full' width='270px' right= '9%' top= '14%'>
+    return (<Box bg='grey' pos='absolute' h='full' width='270px' right= '9%' top= '14%' d={value && !selected?'block':'none'}>
                 {value === "section" ?
                     <Box p={5} >
                      
@@ -17,7 +17,14 @@ const Toolbox = ({value}) => {
                         </div>
                         <SimpleGrid columns={2} spacing={5}>
                             <div style={{ display: "flex", flexDirection: "column", alignItems: "center", backgroundColor: "#EFF7FF", width: '99px', minHeight: "80px", padding: "0px 0px 8px 0px", overflow: "hidden", borderRadius: "6px" }}>
-                                <div style={{ padding: "10px", position: "relative" }}  ref={(ref) =>connectors.create(ref,<Element is={ResizableComponent} padding={20} canvas />)}>
+                                <div style={{ padding: "10px", position: "relative" }}  ref={(ref) =>connectors.create(ref,<Element is={ResizableComponent} padding={20} canvas 
+                                    width="100%"
+                                    height="auto"
+                                    alignItems="center"
+                                    background={{r: 255, g: 255, b: 255, a: 1}}
+                                    padding={['40', '40', '40', '40']}
+                                    custom={{displayName: 'Section'}}
+                            ></Element>)}>
 
                                     < AiOutlineBorder size='2.5em' color="#0184FF" />
                                     <p style={{ position: 'absolute', height: '24px', right: '2px', display: "flex", width: '24px', alignItems: 'center', justifyContent: 'center', backgroundColor: "#EFF7FF", color: '#0184FF', bottom: '7px', borderRadius: '100%' }}>1</p>
@@ -49,7 +56,7 @@ const Toolbox = ({value}) => {
                             </div>
 
                             <SimpleGrid columns={2} spacing={5}>
-                                <Headline />
+                              <div  ref={(ref) =>connectors.create(ref,<Headline fontSize='20px' text="Headline" />)}><HeadlineIcon /></div>  
                                 <SubHeadline />
                                 <Bullets />
 

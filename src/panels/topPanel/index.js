@@ -50,22 +50,17 @@ import { HamburgerIcon } from "@chakra-ui/icons";
 import Logo from "../../assets/Logo.png";
 import { useEditor } from "@craftjs/core";
 
-import { ExitIcon, Icon, MobileIcon, PreviewIcon, RedoIcon, SaveIcon, SettingsBuilderIcon, UndoIcon } from "../../themes/icons";
+import { ExitIcon, DesktopIcon, MobileIcon, PreviewIcon, RedoIcon, SaveIcon, SettingsBuilderIcon, UndoIcon } from "../../themes/icons";
 
 
-const Topbar = ({ setCode }) => {
+const Topbar = ({ setCode,viewportAction,screenSize }) => {
     const { actions, query, enabled } = useEditor((state) => ({
       enabled: state.options.enabled
     }));
   const { isOpen, onOpen, onClose } = useDisclosure();
   const handleToggle = () => (isOpen ? onClose() : onOpen());
   const[state,setState]=useState("20%")
-  const mobileClicked = (e) => {
-    alert("hello mobile")
-  }
-  const fullScreenClicked=()=>{
-    alert("full screen clicked")
-  }
+
 
 const ActionButton = ({Icon,action,label})=>{
 
@@ -101,9 +96,11 @@ const undoAction =()=>{
     return true;
   }
   
-  const deviceAction =()=>{
+  const deviceAction =(width)=>{
+
+   return viewportAction(width);
   
-    return true;
+  
   }
   
   const exitAction =()=>{
@@ -154,8 +151,8 @@ const undoAction =()=>{
         mt={{ base: 4, md: 0 }}
       >
         <Text style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', background: '#0184FF', height: '30px', width: '78px', borderRadius: '5px' }}> <span style={{ paddingRight: '10px' }}><ExitIcon /></span> Exit</Text>
-        <Text onClick={()=>fullScreenClicked()}><Icon /></Text>
-        <Text onClick={(e) => mobileClicked(e)} className="mobile-view" > <MobileIcon /> </Text>
+        <Text onClick={()=>deviceAction('100%')}><DesktopIcon color= {screenSize ==='100%'?'#0184FF':'#828282'} /></Text>
+        <Text onClick={(e) => deviceAction('550px')} className="mobile-view" > <MobileIcon color= {screenSize ==='100%'?'#828282':'#0184FF'} /> </Text>
       </Stack>
       <Text style={{ color: 'black', flexBasis: '40%', textAlign: 'center', fontStyle: 'normal', fontWeight: '50', fontSize: '24px', lineHeight: '18px', color: '#0184FF', fontFamily: 'Roboto' }}>MY MEMBER FUNNEL BUILDER</Text>
       <Box

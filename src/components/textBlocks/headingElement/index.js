@@ -1,22 +1,54 @@
-import { useNode } from "@craftjs/core";
+import { useNode,useEditor } from "@craftjs/core";
+import ContentEditable from 'react-contenteditable';
 import { TextSettings } from "./settings";
 
-const Text = ({ text, fontSize }) => {
-    const {connectors: { connect, drag }} = useNode();
-    return (
-      <div ref={(ref) => connect(drag(ref))}>
-        <p style={{ fontSize }}>{text}</p>
-      </div>
-    );
-  };
+export const Headline = ({
+  fontSize,
+  textAlign,
+  fontWeight,
+  color,
+  shadow,
+  text,
+  margin,
+}) => {
+  const {connectors: { connect },setProp} = useNode();
+  const { enabled } = useEditor((state) => ({enabled: state.options.enabled}));
 
-Text.craft = {
-    props: {
-      text: "Hi",
-      fontSize: 20
-    },
-    related: {
-      settings: TextSettings
-    }
+  return (
+    <ContentEditable
+      innerRef={connect}
+      html={text} // innerHTML of the editable div
+      disabled={!enabled}
+      onChange={(e) => {
+        setProp((prop) => (prop.text = e.target.value), 500);
+      }} // use true to disable editing
+      tagName="h2" // Use a custom HTML tag (uses a div by default)
+      style={{
+        width: '100%',
+        margin: `${margin[0]}px ${margin[1]}px ${margin[2]}px ${margin[3]}px`,
+        color: `rgba(${Object.values(color)})`,
+        fontSize: `${fontSize}px`,
+        textShadow: `0px 0px 2px rgba(0,0,0,${(shadow || 0) / 100})`,
+        fontWeight,
+        textAlign,
+      }}
+    />
+  );
 };
-export default Text;
+
+Headline.craft = {
+  displayName: 'Headline',
+  props: {
+    fontSize: '15',
+    textAlign: 'center',
+    fontWeight: '500',
+    color: { r: 92, g: 90, b: 90, a: 1 },
+    margin: [0, 0, 0, 0],
+    shadow: 0,
+    text: 'Headline',
+  },
+  related: {
+    toolbar: TextSettings,
+  },
+};
+export default Headline;

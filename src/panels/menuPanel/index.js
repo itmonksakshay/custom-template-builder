@@ -13,6 +13,27 @@ import { ElementIcon, LayoutIcon, OtherIcon } from '../../themes/icons';
 import Toolbox from '../toolBoxPanel';
 function Sidebar() {
     const [show, setShow] = useState('');
+    const [currentNodeId,setCurrentNodeId] = useState('');
+
+
+    const { actions, selected } = useEditor((state, query) => {
+        let nodeId = query.getEvent('selected').last();
+        let selected;
+        if (nodeId) {
+            selected = {
+                id: nodeId,
+                name: state.nodes[nodeId].data.name,
+                settings:
+                state.nodes[nodeId].related &&
+                state.nodes[nodeId].related.settings,
+                isDeletable: query.node(nodeId).isDeletable()
+            };
+            setCurrentNodeId(nodeId)
+        }
+        return {
+           selected
+        };
+    });
 
 
     const LinkItems ={
@@ -23,6 +44,7 @@ function Sidebar() {
     };
 
     const handleClick=(id)=>{
+        setCurrentNodeId('');
         setShow(id.toString())
 
     }
@@ -95,12 +117,9 @@ function Sidebar() {
                        }}
                    >{item.name}</p>
                 ))}
-                 
+            </div>
 
-
-                </div>
-
-        </Box> {show && <Toolbox value={show}/>}</>);
+        </Box> <Toolbox value={show} selected={currentNodeId.length}/></>);
 }
 
 
