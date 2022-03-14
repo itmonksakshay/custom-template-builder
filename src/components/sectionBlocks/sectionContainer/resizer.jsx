@@ -27,7 +27,7 @@ const Indicators = styled.div`
     border-radius: 100%;
     display: block;
     box-shadow: 0px 0px 12px -1px rgba(0, 0, 0, 0.25);
-    z-index: 99999;
+    z-index: 100;
     pointer-events: none;
     border: 2px solid #36a9e0;
     &:nth-child(1) {

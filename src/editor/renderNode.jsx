@@ -1,8 +1,9 @@
 import { useNode, useEditor } from '@craftjs/core';
 import { ROOT_NODE } from '@craftjs/utils';
-import React, { useEffect, useRef, useCallback } from 'react';
+import React, { useEffect, useRef, useCallback,useContext } from 'react';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
+import AppState from '../context';
 
 
 const IndicatorDiv = styled.div`
@@ -36,6 +37,15 @@ export const RenderNode = ({ render }) => {
     isActive: query.getEvent('selected').contains(id),
   }));
 
+  const settingPanel = useContext(AppState)
+  const settingButtonClick =()=>{
+
+    settingPanel.showSettingPanel = true;
+
+  }
+ 
+
+
   const {
     isHover,
     dom,
@@ -53,12 +63,12 @@ export const RenderNode = ({ render }) => {
     parent: node.data.parent,
     props: node.data.props,
   }));
-
   const currentRef = useRef();
+
 
   useEffect(() => {
     if (dom) {
-      if (isActive || isHover) dom.classList.add('component-selected');
+      if (isActive) dom.classList.add('component-selected');
       else dom.classList.remove('component-selected');
     }
   }, [dom, isActive, isHover]);
@@ -109,6 +119,9 @@ export const RenderNode = ({ render }) => {
               }}
             >
               <h2 className="flex-1 mr-4">{name}</h2>
+              <Btn className="mr-2 cursor-move">
+                  Settings
+                </Btn>
               {moveable ? (
                 <Btn className="mr-2 cursor-move" ref={drag}>
                   Move

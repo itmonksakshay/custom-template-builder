@@ -17,7 +17,7 @@ const ViewPortContainer = ({ background, padding = 0, children }) => {
       padding: 3
     },
     related: {
-      settings: ContainerSettings
+      toolbar: ContainerSettings
     }
   };
 

@@ -68,7 +68,8 @@ const ResizableComponent = (props) => {
   ResizableComponent.craft = {
     props: {
       background: "#ffffff",
-      padding: 3
+      padding: 3,
+      margin: [0, 0, 0, 5]
     },
     related: {
       settings: ContainerSettings

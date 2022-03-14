@@ -4,11 +4,23 @@ import { AddRowIcon, Manage2Icon, Col1, Col2, Col3, Col4, Col5, Col6, LeftSideba
 import { AiOutlineBorder } from "react-icons/ai";
 import {useEditor,Element } from "@craftjs/core";
 import { IconButton } from '@chakra-ui/react'
-import {Headline,ResizableComponent } from "../../components";
+import {Headline,ResizableComponent,ButtonElement} from "../../components";
 
-const Toolbox = ({value,selected}) => {
+const Toolbox = ({value,selected,toolboxID}) => {
     const { connectors, query } = useEditor();
-    return (<Box bg='grey' pos='absolute' h='full' width='270px' right= '9%' top= '14%' d={value && !selected?'block':'none'}>
+
+
+    // if(selected && toolboxID){
+    //     return(<Box bg='grey' pos='absolute' h='full' width='270px' right= '100%' top='0%' overflow='auto' d='block'>
+    //             {selected.settings && React.createElement(selected.settings)}
+
+    //     </Box>)
+
+    // }
+
+
+
+    return (<Box bg='grey' pos='absolute' h='full' width='270px' right= '100%' top='0%' overflow='auto' zIndex='500'  d={value && !toolboxID?'block':'none'}>
                 {value === "section" ?
                     <Box p={5} >
                      
@@ -90,7 +102,8 @@ const Toolbox = ({value,selected}) => {
                             <Survey />
                             <Billing />
                             <Signature />
-                            <Button />
+                            <div  ref={(ref) =>connectors.create(ref,<ButtonElement />)}> <Button buttonStyle='full' background={{ r: 255, g: 255, b: 255, a: 0.5 }}/></div> 
+                           
                         </SimpleGrid>
                     </Box>:<></>}
                     { value === "misc" ?<Box position='absolute' left="7%" width='92%'>

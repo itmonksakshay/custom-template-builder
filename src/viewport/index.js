@@ -47,7 +47,7 @@ const Viewport = ({ children }) => {
                         </div>
                     </div> 
                 </div>
-                <div style={{flexBasis:'9%'}}>
+                <div style={{flexBasis:'9%',position:'relative'}}>
                     <Sidebar />
                 </div>    
             </div>

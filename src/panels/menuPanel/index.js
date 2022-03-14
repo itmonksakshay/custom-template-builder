@@ -17,15 +17,17 @@ function Sidebar() {
 
 
     const { actions, selected } = useEditor((state, query) => {
+        
         let nodeId = query.getEvent('selected').last();
+        console.log("qouery",state.events.selected.values().next().value);
         let selected;
-        if (nodeId) {
+        if (state.events.selected.values().next().value) {
             selected = {
                 id: nodeId,
                 name: state.nodes[nodeId].data.name,
                 settings:
                 state.nodes[nodeId].related &&
-                state.nodes[nodeId].related.settings,
+                state.nodes[nodeId].related.toolbar,
                 isDeletable: query.node(nodeId).isDeletable()
             };
             setCurrentNodeId(nodeId)
@@ -34,7 +36,6 @@ function Sidebar() {
            selected
         };
     });
-
 
     const LinkItems ={
         title: [{icon: <LayoutIcon />, name:'Layout'} ,{icon: <ElementIcon />, name: 'Element'},{icon: <OtherIcon />,name: 'Other'}], 
@@ -119,7 +120,7 @@ function Sidebar() {
                 ))}
             </div>
 
-        </Box> <Toolbox value={show} selected={currentNodeId.length}/></>);
+        </Box> <Toolbox value={show} toolboxID={currentNodeId.length} selected={selected}/></>);
 }
 
 
