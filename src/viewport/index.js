@@ -36,13 +36,13 @@ const Viewport = ({ children }) => {
   return (
     <div className="viewport">
         <div className='h-screen overflow-hidden w-full relative'>
-            <div className='w-full' style={{height:'14%'}}>
+            <div className='w-full' style={{height:'50px'}}>
                 <Topbar setCode={setCode} viewportAction={setViewport} screenSize={viewportDevice} />
             </div>
-            <div style={{height:'86%'}} className='w-full flex flex-row'>
+            <div style={{height:"calc(100vh - 50px)"}} className='w-full flex flex-row'>
                 <div className=" page-container flex flex-row h-full" style={{flexBasis:'91%'}}>
-                    <div className='craftjs-renderer flex-1 h-full w-full transition overflow-auto flex justify-center'>
-                        <div className="page-container relative h-full flex-col flex items-center bg-color-black text-center" style={{width:viewportDevice}}>
+                    <div className='craftjs-renderer flex-1 h-full w-full transition flex justify-center overflow-x-hidden' style={{background:'black'}}>
+                        <div className="page-container relative h-full flex-col flex items-center  text-center overflow-x-hidden overflow-y-auto" style={{width:viewportDevice}}>
                             {children}
                         </div>
                     </div> 

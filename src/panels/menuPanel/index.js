@@ -11,31 +11,14 @@ import {
 } from '@chakra-ui/react';
 import { ElementIcon, LayoutIcon, OtherIcon } from '../../themes/icons';
 import Toolbox from '../toolBoxPanel';
+import AppState from '../../context';
+import SettingsPanel from '../settingsPanel';
 function Sidebar() {
-    const [show, setShow] = useState('');
-    const [currentNodeId,setCurrentNodeId] = useState('');
+    const [show, setShow] = useState({id:'',show:false});
+    const {state:{settingPanelState}} = React.useContext(AppState);
 
 
-    const { actions, selected } = useEditor((state, query) => {
-        
-        let nodeId = query.getEvent('selected').last();
-        console.log("qouery",state.events.selected.values().next().value);
-        let selected;
-        if (state.events.selected.values().next().value) {
-            selected = {
-                id: nodeId,
-                name: state.nodes[nodeId].data.name,
-                settings:
-                state.nodes[nodeId].related &&
-                state.nodes[nodeId].related.toolbar,
-                isDeletable: query.node(nodeId).isDeletable()
-            };
-            setCurrentNodeId(nodeId)
-        }
-        return {
-           selected
-        };
-    });
+
 
     const LinkItems ={
         title: [{icon: <LayoutIcon />, name:'Layout'} ,{icon: <ElementIcon />, name: 'Element'},{icon: <OtherIcon />,name: 'Other'}], 
@@ -45,8 +28,14 @@ function Sidebar() {
     };
 
     const handleClick=(id)=>{
-        setCurrentNodeId('');
-        setShow(id.toString())
+
+        if(id === show.id){
+            setShow({id:id.toString(),show:!show.show});
+
+        } else {
+            setShow({id:id.toString(),show:true});
+
+        }    
 
     }
 
@@ -64,13 +53,13 @@ function Sidebar() {
                 </NavItem>
                 <div style={{ marginLeft: '41px' }}>
                     {LinkItems.layouts.map((item,key) =>(
-                        <p key={key} onClick={()=>handleClick(item.id)}
+                        <p key={key} onClick={()=>handleClick(item.id)} 
                             style={{ 
                                 fontStyle: 'normal', 
                                 fontWeight: 'normal', 
                                 fontSize: '15px', 
                                 lineHeight: '18px', 
-                                color: 'rgba(255, 255, 255, 0.9)', 
+                                color:show.id === item.id  && show.show ? 'yellow':'white',
                                 marginBottom: '13px', 
                                 cursor: 'pointer' 
                             }}
@@ -91,7 +80,7 @@ function Sidebar() {
                            fontWeight: 'normal', 
                            fontSize: '15px', 
                            lineHeight: '18px', 
-                           color: 'rgba(255, 255, 255, 0.9)', 
+                           color:show.id === item.id && show.show  ? 'yellow':'white', 
                            marginBottom: '13px', 
                            cursor: 'pointer' 
                        }}
@@ -112,7 +101,7 @@ function Sidebar() {
                            fontWeight: 'normal', 
                            fontSize: '15px', 
                            lineHeight: '18px', 
-                           color: 'rgba(255, 255, 255, 0.9)', 
+                           color:show.id === item.id && show.show ? 'yellow':'white',
                            marginBottom: '13px', 
                            cursor: 'pointer' 
                        }}
@@ -120,7 +109,7 @@ function Sidebar() {
                 ))}
             </div>
 
-        </Box> <Toolbox value={show} toolboxID={currentNodeId.length} selected={selected}/></>);
+        </Box><Toolbox value={show}/>{settingPanelState.showSettingPanel && !show.show && <SettingsPanel/>}</>);
 }
 
 

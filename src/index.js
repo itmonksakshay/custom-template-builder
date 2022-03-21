@@ -3,17 +3,15 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {AppStateProvider} from './context';
+
 
 
 
 ReactDOM.render(
   <React.StrictMode>
-    <AppStateProvider value={{showSettingPanel:false}}>
+
 
       <App />
-
-    </AppStateProvider>
 
   </React.StrictMode>,
   document.getElementById('root')

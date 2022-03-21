@@ -37,14 +37,11 @@ export const RenderNode = ({ render }) => {
     isActive: query.getEvent('selected').contains(id),
   }));
 
-  const settingPanel = useContext(AppState)
+  const {state:{settingPanelState},actions:{settingPanelDispatch}} = useContext(AppState)
+
   const settingButtonClick =()=>{
-
-    settingPanel.showSettingPanel = true;
-
+    settingPanelDispatch({type:'SETTING_PANEL_ACTION',payload:!settingPanelState.showSettingPanel})
   }
- 
-
 
   const {
     isHover,
@@ -67,9 +64,11 @@ export const RenderNode = ({ render }) => {
 
 
   useEffect(() => {
+    
     if (dom) {
-      if (isActive) dom.classList.add('component-selected');
-      else dom.classList.remove('component-selected');
+        dom.classList.add('component-selected')
+     // if (isActive || isHover) ;
+  //    else dom.classList.remove('component-selected');
     }
   }, [dom, isActive, isHover]);
 
@@ -106,7 +105,7 @@ export const RenderNode = ({ render }) => {
 
   return (
     <>
-      {isActive
+      {isActive || isHover
         ? ReactDOM.createPortal(
             <IndicatorDiv
               ref={currentRef}
@@ -115,11 +114,13 @@ export const RenderNode = ({ render }) => {
                 left: getPos(dom).left,
                 top: getPos(dom).top,
                 zIndex: 9999,
-                background:'grey'
+                background: "#0184FF",
+                borderRadius:'2px',
+                color:"#fff"
               }}
             >
               <h2 className="flex-1 mr-4">{name}</h2>
-              <Btn className="mr-2 cursor-move">
+              <Btn className="mr-2 cursor-pointer" onClick={settingButtonClick}>
                   Settings
                 </Btn>
               {moveable ? (

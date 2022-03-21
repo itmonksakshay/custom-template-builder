@@ -479,9 +479,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   display: block;
   height: 100%;
   width: 100%;
-  border-width: 1px;
-  border-style: dashed;
-  border-color: red;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #0184FF
+  ;
 }
 
 .static {

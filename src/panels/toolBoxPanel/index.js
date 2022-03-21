@@ -1,27 +1,20 @@
-import React from 'react';
+import React,{useMemo,useState} from 'react';
 import { background, Box, SimpleGrid } from '@chakra-ui/react';
 import { AddRowIcon, Manage2Icon, Col1, Col2, Col3, Col4, Col5, Col6, LeftSidebar, RightSidebar, Video, Image, Input, DropDown, TextArea, Checkbox, SMS, Survey, Billing, Signature, Button, HeadlineIcon, SubHeadline, Bullets, Countdown, Product } from '../../themes/icons';
 import { AiOutlineBorder } from "react-icons/ai";
 import {useEditor,Element } from "@craftjs/core";
 import { IconButton } from '@chakra-ui/react'
-import {Headline,ResizableComponent,ButtonElement} from "../../components";
+import {Headline,ResizableComponent,ButtonElement,OneColumn,TwoColumn} from "../../components";
 
-const Toolbox = ({value,selected,toolboxID}) => {
+
+const Toolbox = ({value}) => {
     const { connectors, query } = useEditor();
 
 
-    // if(selected && toolboxID){
-    //     return(<Box bg='grey' pos='absolute' h='full' width='270px' right= '100%' top='0%' overflow='auto' d='block'>
-    //             {selected.settings && React.createElement(selected.settings)}
 
-    //     </Box>)
-
-    // }
-
-
-
-    return (<Box bg='grey' pos='absolute' h='full' width='270px' right= '100%' top='0%' overflow='auto' zIndex='500'  d={value && !toolboxID?'block':'none'}>
-                {value === "section" ?
+    
+    return (<Box bg='grey' pos='absolute' h='full' width='270px' right= '100%' top='0%' overflow='auto' zIndex='500'  d={value.show ?'block':'none'}>
+                {value.id === "section" ?
                     <Box p={5} >
                      
                         <div style={{ borderBottom: "2px solid  #E2E2E2", color: '#0184FF', marginRight: "16px", marginBottom: "20px" }}>
@@ -35,6 +28,7 @@ const Toolbox = ({value,selected,toolboxID}) => {
                                     alignItems="center"
                                     background={{r: 255, g: 255, b: 255, a: 1}}
                                     padding={['40', '40', '40', '40']}
+                                    margin={['0', '0', '0', '5']}
                                     custom={{displayName: 'Section'}}
                             ></Element>)}>
 
@@ -45,13 +39,14 @@ const Toolbox = ({value,selected,toolboxID}) => {
                             </div>
                         </SimpleGrid>
                     </Box>:<></>}
-                    {value === "rows"?<Box p={5}>
+                    {value.id === "rows"?<Box p={5}>
                             <div style={{ borderBottom: "2px solid  #E2E2E2", color: '#0184FF', marginRight: "16px", marginBottom: "20px" }}>
                                 <p>Rows</p>
                             </div>
 
                             <SimpleGrid columns={2} spacing={5}>
-                                <Col1 />
+                            <div  ref={(ref) =>connectors.create(ref,<OneColumn />)}><Col1 /></div> 
+                            <div  ref={(ref) =>connectors.create(ref,<TwoColumn />)}><Col2 /></div>   
                                 <Col2 />
                                 <Col3 />
                                 <Col4 />
@@ -62,7 +57,7 @@ const Toolbox = ({value,selected,toolboxID}) => {
                             </SimpleGrid>
 
                     </Box>:<></>}
-                    {value === "text" ?<Box p={5}>
+                    {value.id === "text" ?<Box p={5}>
                             <div style={{ borderBottom: "2px solid  #E2E2E2", color: '#0184FF', marginRight: "16px", marginBottom: "20px" }}>
                                 <p>Text</p>
                             </div>
@@ -76,7 +71,7 @@ const Toolbox = ({value,selected,toolboxID}) => {
 
 
                         </Box>:<></>}
-                    {value === "media" ?<Box p={5}>
+                    {value.id === "media" ?<Box p={5}>
                         <div style={{ borderBottom: "2px solid  #E2E2E2", color: '#0184FF', marginRight: "16px", marginBottom: "20px" }}>
                             <p>Media</p>
                         </div>
@@ -88,7 +83,7 @@ const Toolbox = ({value,selected,toolboxID}) => {
                         </SimpleGrid>
 
                     </Box>:<></>}
-                    { value === "form" ?<Box p={5}>
+                    { value.id === "form" ?<Box p={5}>
                         <div style={{ borderBottom: "2px solid  #E2E2E2", color: '#0184FF', marginRight: "16px", marginBottom: "20px" }}>
                             <p>Form</p>
                         </div>
@@ -106,7 +101,7 @@ const Toolbox = ({value,selected,toolboxID}) => {
                            
                         </SimpleGrid>
                     </Box>:<></>}
-                    { value === "misc" ?<Box position='absolute' left="7%" width='92%'>
+                    { value.id === "misc" ?<Box position='absolute' left="7%" width='92%'>
                         <div style={{ borderBottom: "2px solid  #E2E2E2", color: '#0184FF', marginRight: "16px", marginBottom: "20px" }}>
                             <p>Misc</p>
                         </div>
@@ -116,32 +111,7 @@ const Toolbox = ({value,selected,toolboxID}) => {
                             <Product />
                         </SimpleGrid>
                     </Box> :<></>}
-
-                </Box>
-
-    //       <div style={{display:'flex',flexDirection:'column'}}>
-    //         <button
-    //           ref={(ref) => connectors.create(ref, <Text text="Hi world" />)}
-    //         >
-    //           Text
-    //         </button>
-    //       </div>
-    //       <div style={{}}>
-    //         <button
-    //           ref={(ref) =>
-    //             connectors.create(
-    //               ref,
-    //               <Element is={Container} padding={20} canvas />
-    //             )
-    //           }
-          
-    //         >
-    //           Container
-    //         </button>
-    //       </div>
-    //     </div>
-    //   </div>
-    );
+                </Box>);
   };
 
   export default Toolbox;

@@ -35,7 +35,7 @@ const ButtonElement = (props) => {
       ])}
       {...props}
     >
-     
+     {props.text}
     </StyledButton>
   );
 };
