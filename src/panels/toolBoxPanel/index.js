@@ -4,7 +4,10 @@ import { AddRowIcon, Manage2Icon, Col1, Col2, Col3, Col4, Col5, Col6, LeftSideba
 import { AiOutlineBorder } from "react-icons/ai";
 import {useEditor,Element } from "@craftjs/core";
 import { IconButton } from '@chakra-ui/react'
-import {Headline,ResizableComponent,ButtonElement,OneColumn,TwoColumn} from "../../components";
+import {Headline,ResizableComponent,
+    ButtonElement,OneColumn,TwoColumn,
+    ThreeColumn,FourColumn,FiveColumn,
+    SixColumn,ImageComponent} from "../../components";
 
 
 const Toolbox = ({value}) => {
@@ -45,13 +48,12 @@ const Toolbox = ({value}) => {
                             </div>
 
                             <SimpleGrid columns={2} spacing={5}>
-                            <div  ref={(ref) =>connectors.create(ref,<OneColumn />)}><Col1 /></div> 
-                            <div  ref={(ref) =>connectors.create(ref,<TwoColumn />)}><Col2 /></div>   
-                                <Col2 />
-                                <Col3 />
-                                <Col4 />
-                                <Col5 />
-                                <Col6 />
+                                <div  ref={(ref) =>connectors.create(ref,<OneColumn />)}><Col1 /></div> 
+                                <div  ref={(ref) =>connectors.create(ref,<TwoColumn />)}><Col2 /></div>   
+                                <div  ref={(ref) =>connectors.create(ref,<ThreeColumn />)}><Col3 /></div>      
+                                <div  ref={(ref) =>connectors.create(ref,<FourColumn />)}><Col4 /></div>
+                                <div  ref={(ref) =>connectors.create(ref,<FiveColumn />)}><Col5 /></div>
+                                <div  ref={(ref) =>connectors.create(ref,<SixColumn />)}><Col6 /></div>        
                                 <LeftSidebar />
                                 <RightSidebar />
                             </SimpleGrid>
@@ -77,7 +79,8 @@ const Toolbox = ({value}) => {
                         </div>
 
                         <SimpleGrid columns={2} spacing={5}>
-                            <Image />
+                            <div  ref={(ref) =>connectors.create(ref,<ImageComponent name="Image" />)}> <Image /></div> 
+                           
                             <Video />
 
                         </SimpleGrid>

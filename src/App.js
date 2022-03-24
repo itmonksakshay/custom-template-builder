@@ -3,7 +3,7 @@ import { Editor, Frame, Element } from "@craftjs/core";
 import { useNode, useEditor } from "@craftjs/core";
 import React, { useRef, useEffect, useState } from "react";
 import './App.css';
-import { ViewPortContainer,Headline,ResizableComponent,ButtonElement,OneColumn,Column,TwoColumn} from './components';
+import { ViewPortContainer,Headline,ResizableComponent,ButtonElement,OneColumn,Column,TwoColumn,ThreeColumn,FourColumn,FiveColumn,SixColumn,ImageComponent} from './components';
 import { RenderNode } from './editor/renderNode';
 import Viewport from './viewport';
 import {AppStateProvider} from './context';
@@ -29,7 +29,19 @@ export default function App() {
   const [settingPanelState, settingPanelDispatch] = React.useReducer(settingPanelReducer, initialSettingPanelState);
   return (<ChakraProvider theme={theme}>
     <AppStateProvider value={{state:{settingPanelState},actions:{settingPanelDispatch}}}>
-      <Editor resolver={{Headline,ViewPortContainer,ResizableComponent,ButtonElement,Column,OneColumn,TwoColumn}} onRender={RenderNode}>
+      <Editor resolver={{Headline,
+                        ViewPortContainer,
+                        ResizableComponent,
+                        ButtonElement,
+                        Column,
+                        OneColumn,
+                        TwoColumn,
+                        ThreeColumn,
+                        FourColumn,
+                        FiveColumn,
+                        SixColumn,
+                        ImageComponent}} 
+                onRender={RenderNode}>
         <Viewport>
           <Frame>
             <Element is={ViewPortContainer} canvas>
@@ -41,3 +53,4 @@ export default function App() {
     </AppStateProvider>
   </ChakraProvider>);
 }
+

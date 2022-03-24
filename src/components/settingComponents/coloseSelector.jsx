@@ -6,32 +6,37 @@ export default function ColorSelector({bgColor,txtColor,bgHandle,txtHandle}){
 
     const [bgVisible, setBgVisiblity] = useState(false);
     const [txtVisible,setTxtVisiblity] = useState(false);
-    return(<Box>
-        <Box><Text>Colose Selector</Text></Box>
-        <Box>
-            <Box d='flex' flexDirection='row' pos='relative'>
-            <Box p={5}> <Text>Background Color</Text></Box>
-            <Box p={5}><button onClick={(e)=>{
-                    setTxtVisiblity(false);
-                        return  setBgVisiblity(!bgVisible);
-                    }}><Box bg={bgColor} h={5} w={20}></Box></button></Box>
-               { bgVisible? <Box top="100%" left="33%" pos="absolute" zIndex={1000}>
-                   <BlockPicker  color={bgColor} onChangeComplete={bgHandle}/>
-                </Box> :<></>}
+    return(<Box d='flex' flexDirection={'column'} py={'10px'}>
+            <Box d='flex' flexDirection='row' pos='relative' py={'10px'}  alignItems='center'>
+                <Box flexBasis={'25%'}> <Text>Background Color</Text></Box>
+                <Box flexBasis={'75%'}>
+                    <button style={{width:'100%',height:'42px'}} onClick={(e)=>{
+                        setTxtVisiblity(false);
+                            return  setBgVisiblity(!bgVisible);
+                        }}>
+                            <Box bg={bgColor} h={'42px'}  w={'100%'}></Box>
+                    </button>
+                </Box>
+                { bgVisible? <Box top="100%" left="45%" pos="absolute" zIndex={1000}>
+                    <BlockPicker  color={bgColor} onChangeComplete={bgHandle}/>
+                    </Box> :<></>}
             </Box>
-        </Box>
-        <Box>
-            <Box d='flex' flexDirection='row' pos='relative'>
-                <Box p={5}> <Text> Text Color</Text></Box>
-                <Box p={5}><button onClick={(e)=>{
-                    setTxtVisiblity(!txtVisible)
-                    return  setBgVisiblity(false)
-                    }}><Box bg={txtColor} h={5} w={20}></Box></button></Box>
-               {txtVisible ? <Box top="100%" left="14%" pos="absolute" zIndex={1000}>
-                   <BlockPicker  color={txtColor} onChangeComplete={txtHandle}/>
+            <Box d='flex'  alignItems='center' flexDirection='row' py={'10px'} pos='relative'>
+                <Box flexBasis={'25%'}> 
+                    <Text> Text Color</Text>
+                </Box>
+                <Box flexBasis={'75%'}>
+                    <button style={{width:'100%',height:'42px'}} onClick={(e)=>{
+                        setTxtVisiblity(!txtVisible)
+                        return  setBgVisiblity(false)
+                    }}>
+                        <Box bg={txtColor} h={'42px'}  w={'100%'}></Box>
+                    </button>
+                </Box>
+                {txtVisible ? 
+                    <Box top="100%" left="45%" pos="absolute" zIndex={1000}>
+                        <BlockPicker  color={txtColor} onChangeComplete={txtHandle}/>
                    </Box>:<></>} 
             </Box>
-        </Box>
-
-    </Box>);
+        </Box>);
 }

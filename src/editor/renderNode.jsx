@@ -67,8 +67,8 @@ export const RenderNode = ({ render }) => {
     
     if (dom) {
         dom.classList.add('component-selected')
-     // if (isActive || isHover) ;
-  //    else dom.classList.remove('component-selected');
+    //     if (isActive || isHover)  ;
+    //   else dom.classList.remove('component-selected');
     }
   }, [dom, isActive, isHover]);
 
@@ -105,7 +105,7 @@ export const RenderNode = ({ render }) => {
 
   return (
     <>
-      {isActive || isHover
+      {isActive
         ? ReactDOM.createPortal(
             <IndicatorDiv
               ref={currentRef}

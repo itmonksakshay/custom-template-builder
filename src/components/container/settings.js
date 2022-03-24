@@ -47,22 +47,13 @@ export const BasicSettings = () => {
 
 
 
-    return (
-      <div style={{width:'100%',height:'200px',marginTop:'2px',padding:'10px',color:'black'}}>
-        <Box>
-          <ImageSelector imageUrl={bgImage} setImage={backgroundImageHandler}/>
-        </Box>
-
-        <Box>
-          <ColorSelector bgColor={background} txtHandle={handleTextColorChange} txtColor={color} bgHandle={(url)=>handleBackgroundColorChange(url)}/>
-        </Box>
-
-        <Box>
-          <PaddingSelector value={padding} setPadding={handlePaddingChange}/>
-        </Box>
-
+    return (<>
+          <Box px={'32px'}>
+            <ImageSelector imageUrl={bgImage} setImage={backgroundImageHandler}/>
+            <ColorSelector bgColor={background} txtHandle={handleTextColorChange} txtColor={color} bgHandle={(url)=>handleBackgroundColorChange(url)}/>
+          </Box>
         
-      </div>
-    );
+          <PaddingSelector value={padding} setPadding={handlePaddingChange}/>
+    </>);
 };
   

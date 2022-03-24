@@ -1,5 +1,6 @@
 import React,{useState} from 'react';
 import {Box,FormControl,Button} from '@chakra-ui/react';
+import {BiImage} from 'react-icons/bi';
 
 
 export default function ImageSelector({imageUrl,setImage}){
@@ -13,17 +14,18 @@ export default function ImageSelector({imageUrl,setImage}){
     }
 
 
-    return(<Box d='flex' flexDirection='row'>  
-            <Box> Background Image</Box>
-            <Box>           <form>
-                <FormControl  isRequired>
-                <Box><input placeholder="Enter Image Url" onChange={(e)=> inputChangeHandler(e)} value={url}/>
-                    <Button onClick={()=>setImage(url)}>
-                    Upload
-                    </Button>
-                </Box>
-                </FormControl>
-        </form></Box>
+    return(<Box d='flex' flexDirection='row' alignItems={'center'}>  
+            <Box flexBasis="25%"> Bg Image</Box>
+            <Box flexBasis="75%" bg=''>
+                <form>
+                    <FormControl  isRequired>
+                        <Box d="flex"  w="100%" h='45px' border='2px solid #ECECEC' borderRadius='3px'>
+                            <input style={{width:"88%", height:'42px'}} placeholder="Image Url" onChange={(e)=> inputChangeHandler(e)} value={url}/>
+                            <Box p='2px' w={'12%'} bg='#ECECEC' onClick={()=>setImage(url)}><BiImage size='2em'/></Box>
+                        </Box>
+                    </FormControl>
+                </form>
+            </Box>
       </Box>)
 
 
