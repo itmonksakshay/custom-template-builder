@@ -15,7 +15,7 @@ import AppState from '../../context';
 import SettingsPanel from '../settingsPanel';
 function Sidebar() {
     const [show, setShow] = useState({id:'',show:false});
-    const {state:{settingPanelState}} = React.useContext(AppState);
+    const {state:{settingPanelState},actions:{settingPanelDispatch}} = React.useContext(AppState);
 
 
 
@@ -30,10 +30,15 @@ function Sidebar() {
     const handleClick=(id)=>{
 
         if(id === show.id){
+            if(!show.show){
+                settingPanelDispatch({type:'SETTING_PANEL_ACTION',payload:false})
+            }
             setShow({id:id.toString(),show:!show.show});
+
 
         } else {
             setShow({id:id.toString(),show:true});
+            settingPanelDispatch({type:'SETTING_PANEL_ACTION',payload:false})
 
         }    
 
@@ -49,7 +54,7 @@ function Sidebar() {
 
                 <NavItem>
                     <LayoutIcon />
-                    <p style={{ marginRight: '63px' }}>Layout</p>
+                    <p style={{ marginLeft: '13px' }}>Layout</p>
                 </NavItem>
                 <div style={{ marginLeft: '41px' }}>
                     {LinkItems.layouts.map((item,key) =>(
@@ -109,7 +114,7 @@ function Sidebar() {
                 ))}
             </div>
 
-        </Box><Toolbox value={show}/>{settingPanelState.showSettingPanel && !show.show && <SettingsPanel/>}</>);
+        </Box><Toolbox value={show}/>{settingPanelState.showSettingPanel &&  <SettingsPanel/>}</>);
 }
 
 

@@ -14,7 +14,7 @@ export default function ColorSelector({bgColor,txtColor,bgHandle,txtHandle}){
                         setTxtVisiblity(false);
                             return  setBgVisiblity(!bgVisible);
                         }}>
-                            <Box bg={bgColor} h={'42px'}  w={'100%'}></Box>
+                            <Box bg={bgColor} h={'42px'}  w={'100%'} border={bgColor==='#ffffff'?'1px solid #0184FF':''}></Box>
                     </button>
                 </Box>
                 { bgVisible? <Box top="100%" left="45%" pos="absolute" zIndex={1000}>
@@ -30,7 +30,7 @@ export default function ColorSelector({bgColor,txtColor,bgHandle,txtHandle}){
                         setTxtVisiblity(!txtVisible)
                         return  setBgVisiblity(false)
                     }}>
-                        <Box bg={txtColor} h={'42px'}  w={'100%'}></Box>
+                        <Box bg={txtColor} h={'42px'}  w={'100%'} border={txtColor==='#ffffff'?'1px solid #0184FF':''}></Box>
                     </button>
                 </Box>
                 {txtVisible ? 

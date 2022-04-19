@@ -41,7 +41,7 @@ export default function App() {
                         FiveColumn,
                         SixColumn,
                         ImageComponent}} 
-                onRender={RenderNode}>
+              onRender={RenderNode}>
         <Viewport>
           <Frame>
             <Element is={ViewPortContainer} canvas>

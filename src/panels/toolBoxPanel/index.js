@@ -25,7 +25,7 @@ const Toolbox = ({value}) => {
                         </div>
                         <SimpleGrid columns={2} spacing={5}>
                             <div style={{ display: "flex", flexDirection: "column", alignItems: "center", backgroundColor: "#EFF7FF", width: '99px', minHeight: "80px", padding: "0px 0px 8px 0px", overflow: "hidden", borderRadius: "6px" }}>
-                                <div style={{ padding: "10px", position: "relative" }}  ref={(ref) =>connectors.create(ref,<Element is={ResizableComponent} padding={20} canvas 
+                                <div style={{ padding: "10px", position: "relative" }}  ref={(ref) =>connectors.create(ref,<Element is={ResizableComponent}  canvas 
                                     width="100%"
                                     height="auto"
                                     alignItems="center"
@@ -48,7 +48,15 @@ const Toolbox = ({value}) => {
                             </div>
 
                             <SimpleGrid columns={2} spacing={5}>
-                                <div  ref={(ref) =>connectors.create(ref,<OneColumn />)}><Col1 /></div> 
+                                <div  ref={(ref) =>connectors.create(ref,<Element is={OneColumn}  canvas 
+                                    width="100%"
+                                    height="auto"
+                                    alignItems="center"
+                                    background={{r: 255, g: 255, b: 255, a: 1}}
+                                    padding={['10', '10', '10', '10']}
+                                    margin={['0', '0', '0', '5']}
+                                    custom={{displayName: 'OneColumn'}}
+                            ></Element>)}><Col1 /></div> 
                                 <div  ref={(ref) =>connectors.create(ref,<TwoColumn />)}><Col2 /></div>   
                                 <div  ref={(ref) =>connectors.create(ref,<ThreeColumn />)}><Col3 /></div>      
                                 <div  ref={(ref) =>connectors.create(ref,<FourColumn />)}><Col4 /></div>
